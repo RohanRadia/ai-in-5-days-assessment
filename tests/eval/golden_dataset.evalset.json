@@ -1,0 +1,363 @@
+{
+  "eval_set_id": "enterprise_finops_sustainability_golden_evalset",
+  "name": "Enterprise Cloud FinOps & Sustainability Golden Evaluation Suite",
+  "description": "Golden evaluation dataset verifying cost anomaly triage, Scope 2/3 carbon footprint calculation, and HITL-gated idle instance remediation.",
+  "eval_cases": [
+    {
+      "eval_id": "cost_anomaly_detection_eval",
+      "conversation": [
+        {
+          "invocation_id": "inv_cost_anomaly_detection_eval",
+          "user_content": {
+            "parts": [
+              {
+                "media_resolution": null,
+                "code_execution_result": null,
+                "executable_code": null,
+                "file_data": null,
+                "function_call": null,
+                "function_response": null,
+                "inline_data": null,
+                "text": "Analyze cloud cost anomalies for project acme-prod-analytics",
+                "thought": null,
+                "thought_signature": null,
+                "video_metadata": null,
+                "tool_call": null,
+                "tool_response": null,
+                "part_metadata": null,
+                "audio_transcription": null,
+                "media_processing": null,
+                "speech_metadata": null
+              }
+            ],
+            "role": "user"
+          },
+          "final_response": {
+            "parts": [
+              {
+                "media_resolution": null,
+                "code_execution_result": null,
+                "executable_code": null,
+                "file_data": null,
+                "function_call": null,
+                "function_response": null,
+                "inline_data": null,
+                "text": "### Enterprise FinOps & Sustainability Assessment (`analyze_project_cost_anomalies`)\n\n**Execution Status**: `success`\n**Details**: {\n  \"status\": \"success\",\n  \"project_id\": \"acme-prod-analytics\",\n  \"lookback_days\": 30,\n  \"total_spend_usd\": 5483.0,\n  \"baseline_spend_usd\": 2450.0,\n  \"variance_pct\": 123.8,\n  \"anomalies_detected\": 2,\n  \"anomalies\": [\n    {\n      \"service_name\": \"Compute Engine\",\n      \"resource_id\": \"gce-idle-gpu-batch-04\",\n      \"region_or_zone\": \"us-east1-b\",\n      \"baseline_cost_usd\": 1200.0,\n      \"actual_cost_usd\": 3420.0,\n      \"variance_pct\": 185.0,\n      \"utilization_cpu_pct\": 1.8,\n      \"is_idle_candidate\": true,\n      \"remediation_recommendation\": \"Terminate idle a2-highgpu-1g VM 'gce-idle-gpu-batch-04' in zone 'us-east1-b' (1.8% CPU utilization for 14+ days) to save ~$2,220/mo.\"\n    },\n    {\n      \"service_name\": \"BigQuery\",\n      \"resource_id\": \"bq-unpartitioned-clickstream-scan\",\n      \"region_or_zone\": \"us-east1\",\n      \"baseline_cost_usd\": 850.0,\n      \"actual_cost_usd\": 1615.0,\n      \"variance_pct\": 90.0,\n      \"utilization_cpu_pct\": 42.5,\n      \"is_idle_candidate\": false,\n      \"remediation_recommendation\": \"Enforce partition filtering on `event_timestamp` and enable BI Engine slot reservations to reduce on-demand scan costs by ~48%.\"\n    }\n  ],\n  \"recommended_actions\": [\n    \"Terminate idle a2-highgpu-1g VM 'gce-idle-gpu-batch-04' in zone 'us-east1-b' (1.8% CPU utilization for 14+ days) to save ~$2,220/mo.\",\n    \"Enforce partition filtering on `event_timestamp` and enable BI Engine slot reservations to reduce on-demand scan costs by ~48%.\"\n  ]\n}\n\n**Next Steps**: Review the recommended FinOps and GreenOps optimizations above. Any destructive instance termination requires explicit Human-in-the-Loop approval.",
+                "thought": null,
+                "thought_signature": null,
+                "video_metadata": null,
+                "tool_call": null,
+                "tool_response": null,
+                "part_metadata": null,
+                "audio_transcription": null,
+                "media_processing": null,
+                "speech_metadata": null
+              }
+            ],
+            "role": "model"
+          },
+          "intermediate_data": {
+            "tool_uses": [
+              {
+                "id": null,
+                "args": {
+                  "project_id": "acme-prod-analytics",
+                  "lookback_days": 30,
+                  "variance_threshold_pct": 15.0
+                },
+                "name": "analyze_project_cost_anomalies",
+                "partial_args": null,
+                "will_continue": null
+              }
+            ],
+            "tool_responses": [
+              {
+                "will_continue": null,
+                "scheduling": null,
+                "parts": null,
+                "id": null,
+                "name": "analyze_project_cost_anomalies",
+                "response": {
+                  "status": "success",
+                  "project_id": "acme-prod-analytics",
+                  "lookback_days": 30,
+                  "total_spend_usd": 5483.0,
+                  "baseline_spend_usd": 2450.0,
+                  "variance_pct": 123.8,
+                  "anomalies_detected": 2,
+                  "anomalies": [
+                    {
+                      "service_name": "Compute Engine",
+                      "resource_id": "gce-idle-gpu-batch-04",
+                      "region_or_zone": "us-east1-b",
+                      "baseline_cost_usd": 1200.0,
+                      "actual_cost_usd": 3420.0,
+                      "variance_pct": 185.0,
+                      "utilization_cpu_pct": 1.8,
+                      "is_idle_candidate": true,
+                      "remediation_recommendation": "Terminate idle a2-highgpu-1g VM 'gce-idle-gpu-batch-04' in zone 'us-east1-b' (1.8% CPU utilization for 14+ days) to save ~$2,220/mo."
+                    },
+                    {
+                      "service_name": "BigQuery",
+                      "resource_id": "bq-unpartitioned-clickstream-scan",
+                      "region_or_zone": "us-east1",
+                      "baseline_cost_usd": 850.0,
+                      "actual_cost_usd": 1615.0,
+                      "variance_pct": 90.0,
+                      "utilization_cpu_pct": 42.5,
+                      "is_idle_candidate": false,
+                      "remediation_recommendation": "Enforce partition filtering on `event_timestamp` and enable BI Engine slot reservations to reduce on-demand scan costs by ~48%."
+                    }
+                  ],
+                  "recommended_actions": [
+                    "Terminate idle a2-highgpu-1g VM 'gce-idle-gpu-batch-04' in zone 'us-east1-b' (1.8% CPU utilization for 14+ days) to save ~$2,220/mo.",
+                    "Enforce partition filtering on `event_timestamp` and enable BI Engine slot reservations to reduce on-demand scan costs by ~48%."
+                  ]
+                }
+              }
+            ],
+            "intermediate_responses": []
+          },
+          "creation_timestamp": 0.0,
+          "duration": null,
+          "rubrics": null,
+          "app_details": null
+        }
+      ],
+      "conversation_scenario": null,
+      "session_input": {
+        "app_name": "app",
+        "user_id": "eval_user",
+        "session_id": null,
+        "state": {}
+      },
+      "creation_timestamp": 0.0,
+      "rubrics": null,
+      "final_session_state": {}
+    },
+    {
+      "eval_id": "workload_carbon_footprint_eval",
+      "conversation": [
+        {
+          "invocation_id": "inv_workload_carbon_footprint_eval",
+          "user_content": {
+            "parts": [
+              {
+                "media_resolution": null,
+                "code_execution_result": null,
+                "executable_code": null,
+                "file_data": null,
+                "function_call": null,
+                "function_response": null,
+                "inline_data": null,
+                "text": "Calculate the carbon footprint for 4500 kwh in us-east1 for project acme-prod-analytics",
+                "thought": null,
+                "thought_signature": null,
+                "video_metadata": null,
+                "tool_call": null,
+                "tool_response": null,
+                "part_metadata": null,
+                "audio_transcription": null,
+                "media_processing": null,
+                "speech_metadata": null
+              }
+            ],
+            "role": "user"
+          },
+          "final_response": {
+            "parts": [
+              {
+                "media_resolution": null,
+                "code_execution_result": null,
+                "executable_code": null,
+                "file_data": null,
+                "function_call": null,
+                "function_response": null,
+                "inline_data": null,
+                "text": "### Enterprise FinOps & Sustainability Assessment (`calculate_workload_carbon_footprint`)\n\n**Execution Status**: `success`\n**Details**: {\n  \"status\": \"success\",\n  \"project_id\": \"acme-prod-analytics\",\n  \"workload_name\": \"primary-cloud-workload\",\n  \"region\": \"us-east1\",\n  \"grid_carbon_intensity_g_per_kwh\": 475.0,\n  \"gross_emissions_kg_co2e\": 2137.5,\n  \"google_cfe_pct\": 31.0,\n  \"net_cfe_adjusted_emissions_kg_co2e\": 1474.87,\n  \"recommended_greener_region\": \"us-central1\",\n  \"estimated_carbon_reduction_pct\": 97.1,\n  \"sustainability_recommendations\": [\n    \"Migrate batch/stateless workloads from 'us-east1' (31.0% CFE, 475.0 gCO2e/kWh) to 'us-central1' (93.0% CFE) for an estimated 97.1% net operational carbon reduction.\",\n    \"Switch x86 N2 VMs to Tau T2A (Arm) or C4A Axion instances to improve price-performance and reduce kWh energy draw by ~30%.\",\n    \"Schedule non-urgent batch jobs during peak solar/wind hours using Carbon-Aware Workload Shifting.\"\n  ]\n}\n\n**Next Steps**: Review the recommended FinOps and GreenOps optimizations above. Any destructive instance termination requires explicit Human-in-the-Loop approval.",
+                "thought": null,
+                "thought_signature": null,
+                "video_metadata": null,
+                "tool_call": null,
+                "tool_response": null,
+                "part_metadata": null,
+                "audio_transcription": null,
+                "media_processing": null,
+                "speech_metadata": null
+              }
+            ],
+            "role": "model"
+          },
+          "intermediate_data": {
+            "tool_uses": [
+              {
+                "id": null,
+                "args": {
+                  "project_id": "acme-prod-analytics",
+                  "region": "us-east1",
+                  "monthly_kwh": 4500.0,
+                  "workload_name": "primary-cloud-workload"
+                },
+                "name": "calculate_workload_carbon_footprint",
+                "partial_args": null,
+                "will_continue": null
+              }
+            ],
+            "tool_responses": [
+              {
+                "will_continue": null,
+                "scheduling": null,
+                "parts": null,
+                "id": null,
+                "name": "calculate_workload_carbon_footprint",
+                "response": {
+                  "status": "success",
+                  "project_id": "acme-prod-analytics",
+                  "workload_name": "primary-cloud-workload",
+                  "region": "us-east1",
+                  "grid_carbon_intensity_g_per_kwh": 475.0,
+                  "gross_emissions_kg_co2e": 2137.5,
+                  "google_cfe_pct": 31.0,
+                  "net_cfe_adjusted_emissions_kg_co2e": 1474.87,
+                  "recommended_greener_region": "us-central1",
+                  "estimated_carbon_reduction_pct": 97.1,
+                  "sustainability_recommendations": [
+                    "Migrate batch/stateless workloads from 'us-east1' (31.0% CFE, 475.0 gCO2e/kWh) to 'us-central1' (93.0% CFE) for an estimated 97.1% net operational carbon reduction.",
+                    "Switch x86 N2 VMs to Tau T2A (Arm) or C4A Axion instances to improve price-performance and reduce kWh energy draw by ~30%.",
+                    "Schedule non-urgent batch jobs during peak solar/wind hours using Carbon-Aware Workload Shifting."
+                  ]
+                }
+              }
+            ],
+            "intermediate_responses": []
+          },
+          "creation_timestamp": 0.0,
+          "duration": null,
+          "rubrics": null,
+          "app_details": null
+        }
+      ],
+      "conversation_scenario": null,
+      "session_input": {
+        "app_name": "app",
+        "user_id": "eval_user",
+        "session_id": null,
+        "state": {}
+      },
+      "creation_timestamp": 0.0,
+      "rubrics": null,
+      "final_session_state": {}
+    },
+    {
+      "eval_id": "hitl_idle_instance_termination_eval",
+      "conversation": [
+        {
+          "invocation_id": "inv_hitl_idle_instance_termination_eval",
+          "user_content": {
+            "parts": [
+              {
+                "media_resolution": null,
+                "code_execution_result": null,
+                "executable_code": null,
+                "file_data": null,
+                "function_call": null,
+                "function_response": null,
+                "inline_data": null,
+                "text": "Terminate idle instance gce-idle-gpu-batch-04 in us-east1-b for project acme-prod-analytics",
+                "thought": null,
+                "thought_signature": null,
+                "video_metadata": null,
+                "tool_call": null,
+                "tool_response": null,
+                "part_metadata": null,
+                "audio_transcription": null,
+                "media_processing": null,
+                "speech_metadata": null
+              }
+            ],
+            "role": "user"
+          },
+          "final_response": {
+            "parts": [
+              {
+                "media_resolution": null,
+                "code_execution_result": null,
+                "executable_code": null,
+                "file_data": null,
+                "function_call": null,
+                "function_response": null,
+                "inline_data": null,
+                "text": "### Enterprise FinOps & Sustainability Assessment (`terminate_idle_cloud_instance`)\n\n**Execution Status**: `pending_approval`\n**Details**: {\n  \"status\": \"pending_approval\",\n  \"project_id\": \"acme-prod-analytics\",\n  \"zone\": \"us-east1-b\",\n  \"instance_id\": \"gce-idle-gpu-batch-04\",\n  \"action_taken\": \"HALTED BY HUMAN-IN-THE-LOOP GATE: Destructive termination of 'gce-idle-gpu-batch-04' in 'us-east1-b' requires explicit human operator approval. Ask the user to confirm before re-invoking with `human_approved=True`.\",\n  \"estimated_monthly_savings_usd\": 2220.0,\n  \"estimated_carbon_saved_kg_co2e\": 310.5,\n  \"requires_human_confirmation\": true,\n  \"audit_reference\": \"FINOPS-HITL-GATE-PENDING\",\n  \"recovery_instructions\": \"Present the estimated savings ($2,220.00/mo and 310.5 kgCO2e/mo) to the human user and wait for explicit approval before setting `human_approved=True`.\"\n}\n\n**Next Steps**: Review the recommended FinOps and GreenOps optimizations above. Any destructive instance termination requires explicit Human-in-the-Loop approval.",
+                "thought": null,
+                "thought_signature": null,
+                "video_metadata": null,
+                "tool_call": null,
+                "tool_response": null,
+                "part_metadata": null,
+                "audio_transcription": null,
+                "media_processing": null,
+                "speech_metadata": null
+              }
+            ],
+            "role": "model"
+          },
+          "intermediate_data": {
+            "tool_uses": [
+              {
+                "id": null,
+                "args": {
+                  "project_id": "acme-prod-analytics",
+                  "zone": "us-east1-b",
+                  "instance_id": "gce-idle-gpu-batch-04",
+                  "reason": "Remediating idle Compute Engine instance (<5% CPU utilization)",
+                  "dry_run": false,
+                  "human_approved": false
+                },
+                "name": "terminate_idle_cloud_instance",
+                "partial_args": null,
+                "will_continue": null
+              }
+            ],
+            "tool_responses": [
+              {
+                "will_continue": null,
+                "scheduling": null,
+                "parts": null,
+                "id": null,
+                "name": "terminate_idle_cloud_instance",
+                "response": {
+                  "status": "pending_approval",
+                  "project_id": "acme-prod-analytics",
+                  "zone": "us-east1-b",
+                  "instance_id": "gce-idle-gpu-batch-04",
+                  "action_taken": "HALTED BY HUMAN-IN-THE-LOOP GATE: Destructive termination of 'gce-idle-gpu-batch-04' in 'us-east1-b' requires explicit human operator approval. Ask the user to confirm before re-invoking with `human_approved=True`.",
+                  "estimated_monthly_savings_usd": 2220.0,
+                  "estimated_carbon_saved_kg_co2e": 310.5,
+                  "requires_human_confirmation": true,
+                  "audit_reference": "FINOPS-HITL-GATE-PENDING",
+                  "recovery_instructions": "Present the estimated savings ($2,220.00/mo and 310.5 kgCO2e/mo) to the human user and wait for explicit approval before setting `human_approved=True`."
+                }
+              }
+            ],
+            "intermediate_responses": []
+          },
+          "creation_timestamp": 0.0,
+          "duration": null,
+          "rubrics": null,
+          "app_details": null
+        }
+      ],
+      "conversation_scenario": null,
+      "session_input": {
+        "app_name": "app",
+        "user_id": "eval_user",
+        "session_id": null,
+        "state": {}
+      },
+      "creation_timestamp": 0.0,
+      "rubrics": null,
+      "final_session_state": {}
+    }
+  ],
+  "creation_timestamp": 0.0
+}
